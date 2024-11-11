@@ -16,3 +16,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+#carouselLanches {
+    max-width: 600px; /* Largura máxima do carousel */
+    max-height: 400px; /* Altura máxima do carousel */
+    margin: 0 auto; /* Centraliza o carousel na página */
+}
+
+/* Ajusta as imagens para não ocuparem mais espaço do que o necessário */
+.carousel-img {
+    width: 100%; /* Define a largura da imagem conforme a largura do carousel */
+    height: 50%; /* Mantém a proporção da altura da imagem */
+    object-fit: contain; /* Evita o corte da imagem */
+}
+/* FIm - Defina o tamanho máximo para o carouselCompartilhado */
