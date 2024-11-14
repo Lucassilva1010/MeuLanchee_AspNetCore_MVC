@@ -1,4 +1,7 @@
-﻿namespace MeuLanchee;
+﻿using MeuLanchee.Context;
+using Microsoft.EntityFrameworkCore;
+
+namespace MeuLanchee;
 
 public class Startup
 {
@@ -9,6 +12,11 @@ public class Startup
     public IConfiguration Configuration { get; }
     public void ConfigureServices(IServiceCollection services)
     {
+        //Definição do serviço de configuração do meu banco de dados
+        services.AddDbContext<AppDbContext>(options => 
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
         services.AddControllersWithViews();
         services.AddAuthorization(); // Adiciona o serviço de autorização
     }
