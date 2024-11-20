@@ -1,5 +1,8 @@
 ﻿using MeuLanchee.Context;
+using MeuLanchee.Repositories;
+using MeuLanchee.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace MeuLanchee;
 
@@ -16,9 +19,13 @@ public class Startup
         services.AddDbContext<AppDbContext>(options => 
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+        services.TryAddTransient<ILanchesRepository, LancheRepository>();
+        services.TryAddTransient<ICategoriaRepository, CategoriaRepository>();
 
         services.AddControllersWithViews();
         services.AddAuthorization(); // Adiciona o serviço de autorização
+
+
     }
     public void configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
