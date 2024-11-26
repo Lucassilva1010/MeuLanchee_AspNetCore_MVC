@@ -1,4 +1,5 @@
 ﻿using MeuLanchee.Repositories.Interfaces;
+using MeuLanchee.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuLanchee.Controllers
@@ -15,8 +16,14 @@ namespace MeuLanchee.Controllers
 
         public IActionResult List()
         {
-            var lanches = _lanchesRepository.Lanches;
-            return View(lanches);
+            //var lanches = _lanchesRepository.Lanches;
+            //return View(lanches);
+
+            var lanchesListVewModel = new LanchesViewModel();
+            lanchesListVewModel.Lanches = _lanchesRepository.Lanches;
+            lanchesListVewModel.CategoriaAtual = "Categora Atual";
+
+            return View(lanchesListVewModel);
         }
     }
 }
