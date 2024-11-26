@@ -25,6 +25,10 @@ public class Startup
         services.AddControllersWithViews();
         services.AddAuthorization(); // Adiciona o serviço de autorização
 
+        services.AddMemoryCache();
+        services.AddSession();
+
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
     }
     public void configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,6 +47,7 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
+        app.UseSession();
 
       app.UseAuthorization();
 
