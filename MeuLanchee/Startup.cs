@@ -1,4 +1,5 @@
 ﻿using MeuLanchee.Context;
+using MeuLanchee.Models;
 using MeuLanchee.Repositories;
 using MeuLanchee.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,16 +20,16 @@ public class Startup
         services.AddDbContext<AppDbContext>(options => 
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-        services.TryAddTransient<ILanchesRepository, LancheRepository>();
-        services.TryAddTransient<ICategoriaRepository, CategoriaRepository>();
+        services.AddTransient<ILanchesRepository, LancheRepository>();
+        services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
         services.AddControllersWithViews();
         services.AddAuthorization(); // Adiciona o serviço de autorização
 
         services.AddMemoryCache();
         services.AddSession();
-
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
     }
     public void configure(IApplicationBuilder app, IWebHostEnvironment env)

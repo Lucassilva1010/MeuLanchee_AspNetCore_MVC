@@ -1,0 +1,55 @@
+﻿@model CarrinhoCompraViewModel
+
+<div class="Container">
+    <div class="row">
+        <img src="~/img/carrinho-de-compras-de-design-xadrez.png" />
+
+        <div>
+            <h4>Seu Carrinho de Compras:</h4>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Quantidade</th>
+                    <th>Lanche</th>
+                    <th class="text-rigth">Preço</th>
+                    <th class="text-rigth">Subtotal</th>
+                    <th></th>                    
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.CarrinhoCompra.CarrinhoCompraItems)
+                {
+                    <tr>
+                        <td class="texte-center">@item.Quantidade</td>
+                        <td class="texte-center">@item.Lanche.Nome</td>
+                        <td class="texte-center">@item.Lanche.Preco.ToString("c")</td>
+                        <td class="texte-center">@((item.Quantidade * item.Lanche.Preco).ToString("c"))</td>
+                        <td class="texte-center">
+                            <a asp-controller="CarrinhoCompra" asp-action="RemoverItemDoCarrinhoCompra"
+                               asp-route-lancheId="@item.Lanche.LancheId"><img src="~/img/excluir.png" />
+
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="texte-right">Total: </td>
+                    <td colspan="3" class="texte-right">@Model.CarrinhoCompraTotal.ToString("c") </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="texte-right">
+            <div class=" btn-group">
+               @* O controlador de Pedido ainda não foi criada *@
+                <a class="btn btn-success" asp-controller="Pedido" asp-action="Checkout">Encerrar Pedido </a>
+                <a class="btn btn-primary" asp-controller="Lanche" asp-action="List">Continuar Comprando </a>
+            </div>
+
+        </div>
+    </div>
+</div>
